@@ -16,9 +16,9 @@ mongoose.connect(config.get('mongoUrl'), {
 });
 
 app.use(morgan('dev'));
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.json());
 app.use(auth);
 app.use('/', routes);
 
-app.listen(port , () => console.log(`listen on port ${port}`));
+app.listen(port, () => console.log(`listen on port ${port}`));

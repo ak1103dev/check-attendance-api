@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
   const bodySchema = {
     username: Joi.string().required(),
     password: Joi.string().required(),
-  }
+  };
   const { error, value } = Joi.validate(req.body, bodySchema);
   if (error) {
     return res.status(400).send(error);
@@ -29,35 +29,35 @@ router.post('/', (req, res) => {
   return User.findOne({ username })
     .then((user) => {
       if (user) {
-        return Promise.reject({ code: 400, message: 'This username already exits' });
+        return Promise.reject(new Error({ code: 400, message: 'This username already exits' }));
       }
       return new User({ username, password: passwordHash }).save();
     })
     .then((user) => {
       user.password = undefined;
-      return res.send(user)
+      return res.send(user);
     })
-    .catch((err) => res.status(err.code || 500).send({ error: err }));
+    .catch(err => res.status(err.code || 500).send({ error: err }));
 });
 
 router.post('/login', (req, res) => {
   const bodySchema = {
     username: Joi.string().required(),
     password: Joi.string().required(),
-  }
+  };
   const { error, value } = Joi.validate(req.body, bodySchema);
   if (error) {
     return res.status(400).send(error);
   }
   const { username, password } = value;
-  User.findOne({ username })
+  return User.findOne({ username })
     .then((user) => {
-       if (!user) {
-        return Promise.reject({ code: 400, message: 'Email or password is wrong.' });
+      if (!user) {
+        return Promise.reject(new Error({ code: 400, message: 'Email or password is wrong.' }));
       }
       const hasPassword = bcrypt.compareSync(password, user.password);
       if (!hasPassword) {
-        return Promise.reject({ code: 400, message: 'Email or password is wrong.' });
+        return Promise.reject(new Error({ code: 400, message: 'Email or password is wrong.' }));
       }
       return generateToken()
         .then((token) => {
@@ -69,9 +69,7 @@ router.post('/login', (req, res) => {
           });
         });
     })
-    .catch((err) => {
-      return res.status(err.code || 500).send({ error: err })
-    });
+    .catch(err => res.status(err.code || 500).send({ error: err }));
 });
 
 

@@ -1,4 +1,4 @@
-const { AccessToken, User, Admin } = require('../models/');
+const { AccessToken, User } = require('../models/');
 
 module.exports = (req, res, next) => {
   let token;
