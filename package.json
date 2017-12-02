@@ -1,0 +1,23 @@
+{
+  "name": "to-do-list-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ak1103dev/to-do-list-api.git",
+  "author": "ak1103dev <ak.apichan1103@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.2",
+    "config": "^1.26.1",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
+    "joi": "^10.6.0",
+    "joi-objectid": "^2.0.0",
+    "mongoose": "^4.11.2",
+    "morgan": "^1.8.2",
+    "randomstring": "^1.1.5"
+  },
+  "scripts": {
+    "start": "node src/app.js"
+  }
+}
