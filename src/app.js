@@ -8,7 +8,9 @@ const { logErrors, clientErrorHandler } = require('./middlewares/handleError');
 
 const app = express();
 
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'dev') {
+  app.use(morgan('dev'));
+}
 app.use(cors());
 app.use(bodyParser.json());
 app.use(auth);

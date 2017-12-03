@@ -1,7 +1,8 @@
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 
-const { User } = require('../../models');
+const { User, AccessToken } = require('../../models');
+const generateToken = require('../../utils/generateToken');
 
 const register = async (req, res, next) => {
   const bodySchema = {
@@ -39,6 +40,31 @@ const register = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  const bodySchema = {
+    email: Joi.string().email().trim().required(),
+    password: Joi.string().required(),
+  };
+  const { error, value } = Joi.validate(req.body, bodySchema);
+  if (error) {
+    return next({ code: 400, message: 'Invalid data', obj: error });
+  }
+  const { email, password } = value;
+  try {
+    const user = await User.findOne({ email });
+    const hasPassword = bcrypt.compareSync(password, user.password);
+    if (!user || !hasPassword) {
+      return next({ code: 400, message: 'Email or password is incorrect' });
+    }
+    const token = await generateToken();
+    new AccessToken({ token, userId: user._id }).save();
+    return res.send({ token });
+  } catch (err) {
+    return next({ message: err.message });
+  }
+};
+
 module.exports = {
   register,
+  login,
 };
