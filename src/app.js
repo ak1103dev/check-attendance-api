@@ -6,9 +6,9 @@ const morgan = require('morgan');
 const cors = require('cors');
 const routes = require('./routes');
 const auth = require('./middlewares/auth');
+const { logErrors, clientErrorHandler } = require('./middlewares/handleError');
 
 const app = express();
-const port = config.get('port');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.get('mongoUrl'), {
@@ -20,5 +20,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(auth);
 app.use('/', routes);
+if (process.env.NODE_ENV !== 'test') {
+  app.use(logErrors);
+}
+app.use(clientErrorHandler);
 
-app.listen(port, () => console.log(`listen on port ${port}`));
+module.exports = app;

@@ -6,7 +6,8 @@
   "author": "ak1103dev <ak.apichan1103@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node src/bin/server.js",
+    "test": "NODE_ENV=test mocha --no-deprecation --timeout 10000 test/routes/*/*.test.js",
     "lint": "eslint src",
     "fixcode": "eslint --fix src"
   },
@@ -23,8 +24,12 @@
     "randomstring": "^1.1.5"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
     "eslint": "^4.12.1",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0"
+    "eslint-plugin-import": "^2.8.0",
+    "expect": "^21.2.1",
+    "mocha": "^4.0.1"
   }
 }

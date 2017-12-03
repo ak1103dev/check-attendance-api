@@ -1,4 +1,4 @@
 {
   "port": 8080,
-  "mongoUrl": "mongodb://localhost:27017/todo"
+  "mongoUrl": "mongodb://localhost:27017/checkname"
 }
