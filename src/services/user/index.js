@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const { User } = require('../../models');
 
-const register = (req, res, next) => {
+const register = async (req, res, next) => {
   const bodySchema = {
     email: Joi.string().lowercase().trim().email()
       .required(),
@@ -19,27 +19,24 @@ const register = (req, res, next) => {
     email, firstName, lastName, password,
   } = value;
   const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-  return User.findOne({ email })
-    .then((user) => {
-      if (user) {
-        return next({ code: 400, message: 'This email already exist' });
-      }
-      return new User({
-        email,
-        password: passwordHash,
-        name: {
-          first: firstName,
-          last: lastName,
-        },
-      }).save();
-    })
-    .then((user) => {
-      user.password = undefined;
-      return res.send(user);
-    })
-    .catch((err) => {
-      next({ message: err.message });
-    });
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      return next({ code: 400, message: 'This email already exist' });
+    }
+    const newUser = await new User({
+      email,
+      password: passwordHash,
+      name: {
+        first: firstName,
+        last: lastName,
+      },
+    }).save();
+    newUser.password = undefined;
+    return res.send(newUser);
+  } catch (err) {
+    return next({ message: err.message });
+  }
 };
 
 module.exports = {
