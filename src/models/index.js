@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 const User = require('./user');
 const AccessToken = require('./access-token');
-const Task = require('./tasks');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.get('mongoUrl'), {
@@ -13,5 +12,4 @@ mongoose.connect(config.get('mongoUrl'), {
 module.exports = {
   User,
   AccessToken,
-  Task,
 };

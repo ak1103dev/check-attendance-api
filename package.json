@@ -6,8 +6,8 @@
   "author": "ak1103dev <ak.apichan1103@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node src/bin/server.js",
-    "dev": "NODE_ENV=dev node src/bin/server.js",
+    "start": "NODE_ENV=production node src/bin/server.js",
+    "dev": "NODE_ENV=dev nodemon src/bin/server.js",
     "test": "NODE_ENV=test mocha --no-deprecation --timeout 10000 test/routes/*/*.test.js",
     "lint": "eslint src",
     "fixcode": "eslint --fix src"
@@ -22,6 +22,7 @@
     "joi-objectid": "^2.0.0",
     "mongoose": "^4.11.2",
     "morgan": "^1.8.2",
+    "nodemon": "^1.12.1",
     "randomstring": "^1.1.5"
   },
   "devDependencies": {
