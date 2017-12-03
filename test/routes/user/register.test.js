@@ -57,7 +57,7 @@ describe('POST /users', () => {
       .send(reqBody)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.message).toEqual(expectedResBody.message);
+        expect(res.body.error.message).toEqual(expectedResBody.error.message);
         done();
       });
   });
@@ -78,7 +78,7 @@ describe('POST /users', () => {
       .send(reqBody)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.message).toEqual(expectedResBody.message);
+        expect(res.body.error.message).toEqual(expectedResBody.error.message);
         done();
       });
   });

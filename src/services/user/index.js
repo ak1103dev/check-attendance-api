@@ -52,8 +52,11 @@ const login = async (req, res, next) => {
   const { email, password } = value;
   try {
     const user = await User.findOne({ email });
+    if (!user) {
+      return next({ code: 400, message: 'Email or password is incorrect' });
+    }
     const hasPassword = bcrypt.compareSync(password, user.password);
-    if (!user || !hasPassword) {
+    if (!hasPassword) {
       return next({ code: 400, message: 'Email or password is incorrect' });
     }
     const token = await generateToken();
@@ -64,7 +67,10 @@ const login = async (req, res, next) => {
   }
 };
 
+const getUserMe = (req, res) => res.send(req.user);
+
 module.exports = {
   register,
   login,
+  getUserMe,
 };

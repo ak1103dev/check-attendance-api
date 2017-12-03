@@ -1,21 +1,10 @@
 const { Router } = require('express');
-// const Joi = require('joi');
-// const bcrypt = require('bcrypt');
-
+const auth = require('../utils/auth');
 const user = require('../services/user');
-// const { User, AccessToken } = require('../models');
-// const generateToken = require('../utils/generateToken');
 
 const router = Router();
 
-router.get('/me', (req, res) => {
-  if (req.user) {
-    res.send(req.user);
-  } else {
-    res.status(401).send({ message: 'Unauthorized User' });
-  }
-});
-
+router.get('/me', auth.user, user.getUserMe);
 router.post('/', user.register);
 router.post('/login', user.login);
 

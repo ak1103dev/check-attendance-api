@@ -50,11 +50,11 @@ describe('POST /users/login', () => {
         message: 'Invalid data',
       },
     };
-    request.post('/users')
+    request.post('/users/login')
       .send(reqBody)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.message).toEqual(expectedResBody.message);
+        expect(res.body.error.message).toEqual(expectedResBody.error.message);
         done();
       });
   });
@@ -69,16 +69,16 @@ describe('POST /users/login', () => {
         message: 'Email or password is incorrect',
       },
     };
-    request.post('/users')
+    request.post('/users/login')
       .send(reqBody)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.message).toEqual(expectedResBody.message);
+        expect(res.body.error.message).toEqual(expectedResBody.error.message);
         done();
       });
   });
 
-  it('should return error when send incorrect email', (done) => {
+  it('should return error when send incorrect password', (done) => {
     const reqBody = {
       email: 'test123@test.com',
       password: 'gggtest',
@@ -88,11 +88,11 @@ describe('POST /users/login', () => {
         message: 'Email or password is incorrect',
       },
     };
-    request.post('/users')
+    request.post('/users/login')
       .send(reqBody)
       .end((err, res) => {
         expect(res.status).toEqual(400);
-        expect(res.body.message).toEqual(expectedResBody.message);
+        expect(res.body.error.message).toEqual(expectedResBody.error.message);
         done();
       });
   });
