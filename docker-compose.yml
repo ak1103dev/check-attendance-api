@@ -1,0 +1,18 @@
+version: '3'
+services:
+  db:
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+    expose:
+      - "27017"
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - db
+    depends_on:
+      - db
+volumes:
+  mongo-data:

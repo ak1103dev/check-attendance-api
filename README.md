@@ -1,16 +1,15 @@
 # check-attendance-api
 
-## Prepare
+## Dev
 
-prepare MongoDB with docker (https://hub.docker.com/r/_/mongo/) and start mongo on port 27017 <br>
-or change MongoDB host in `config/default.json`
+### Start MongoDB
 
-## Use
+Run `docker-compose -f docker-compose.db.yml up -d`
 
-```unix
-$ npm install
-$ npm start
-node src/app.js
-```
+### Install package
 
-access API on port `8080`
+Run `npm install` or `yarn`
+
+### Start API
+
+Run `npm run dev` or `yarn dev`

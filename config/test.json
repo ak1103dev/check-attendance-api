@@ -1,4 +1,4 @@
 {
   "port": 8080,
-  "mongoUrl": "mongodb://localhost:27017/checkname"
+  "mongoUrl": "mongodb://localhost:27017/checkname-test"
 }
