@@ -5,7 +5,8 @@ services:
     volumes:
       - mongo-data:/data/db
   api:
-    build: .
+    # build: .
+    image: ak1103/check-attendance-api
     ports:
       - "8080:8080"
     links:
