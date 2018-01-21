@@ -8,7 +8,7 @@
   "scripts": {
     "start": "NODE_ENV=production node src/bin/server.js",
     "dev": "NODE_ENV=dev nodemon src/bin/server.js",
-    "test": "NODE_ENV=test mocha --no-deprecation --timeout 10000 test/routes/*/*.test.js",
+    "test": "NODE_ENV=test mocha --no-deprecation --exit --timeout 10000 test/routes/*/*.test.js",
     "lint": "eslint src",
     "fixcode": "eslint --fix src"
   },
