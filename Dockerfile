@@ -1,4 +1,4 @@
-FROM node:8.9-alpine
+FROM node:8.9
 
 RUN npm install -g yarn
 
@@ -8,10 +8,10 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package.json yarn.lock /usr/src/app/
-RUN npm install
+RUN yarn
 
 # Bundle app source
 COPY . /usr/src/app
 
 EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD [ "yarn", "start" ]

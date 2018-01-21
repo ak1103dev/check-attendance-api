@@ -1,8 +1,8 @@
 {
-  "name": "to-do-list-api",
+  "name": "check-attendance-api",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:ak1103dev/to-do-list-api.git",
+  "repository": "git@github.com:ak1103dev/check-attendance-api.git",
   "author": "ak1103dev <ak.apichan1103@gmail.com>",
   "license": "MIT",
   "scripts": {

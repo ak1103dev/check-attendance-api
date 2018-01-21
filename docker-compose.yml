@@ -4,8 +4,6 @@ services:
     image: mongo
     volumes:
       - mongo-data:/data/db
-    expose:
-      - "27017"
   api:
     build: .
     ports:
