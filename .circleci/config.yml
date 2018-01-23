@@ -37,7 +37,7 @@ jobs:
       - run: yarn eslint
       - run: yarn test
 
-  build:
+  build_and_deploy:
     machine: true
 
     working_directory: ~/repo
@@ -52,33 +52,19 @@ jobs:
       # - run: docker run --name node-api -p 8080:8080 -d $DOCKER_USER/check-attendance-api
       # - run: curl -m 60 --retry 10 --retry-delay 5 -v http://localhost:8080
 
-  deploy:
-    machine: true
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
       # deploy
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker push $DOCKER_USER/check-attendance-api:latest
+      - run: docker push $DOCKER_USER/check-attendance-api
       - run: ./scripts/deploy.sh
+
 workflows:
   version: 2
   test_build_deploy:
     jobs:
       - test
-      - build:
+      - build_and_deploy:
           requires:
             - test
-          filters:
-            branches:
-              only:
-                - master
-      - deploy:
-          requires:
-            - build
           filters:
             branches:
               only:
