@@ -62,7 +62,7 @@ jobs:
 
       # deploy
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASS
-      - run: docker push $DOCKER_USER/check-attendance-api
+      - run: docker push $DOCKER_USER/check-attendance-api:latest
       - run: ./scripts/deploy.sh
 workflows:
   version: 2
