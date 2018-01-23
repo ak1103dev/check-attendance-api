@@ -49,8 +49,8 @@ jobs:
       - run: docker build -t $DOCKER_USER/check-attendance-api .
 
       # test docker image
-      - run: docker run --name node-api -p 8080:8080 -d $DOCKER_USER/check-attendance-api
-      - run: curl -m 60 --retry 10 --retry-delay 5 -v http://localhost:8080
+      # - run: docker run --name node-api -p 8080:8080 -d $DOCKER_USER/check-attendance-api
+      # - run: curl -m 60 --retry 10 --retry-delay 5 -v http://localhost:8080
 
   deploy:
     machine: true
